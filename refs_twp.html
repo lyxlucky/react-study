@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ref问题</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    class Demo extends React.Component {
+      state = {
+        isHot: false,
+      };
+
+      clickBtn = () => {
+        const { input1 } = this;
+        alert(input1.value);
+      };
+      changeWeather = () => {
+        const { isHot } = this.state;
+        this.setState({ isHot: !isHot });
+      };
+      saveInput = (cur)=>{
+        this.input1 = cur;
+      }
+      render() {
+        const { isHot } = this.state;
+        return (
+          <div>
+            <h2>今天天气{isHot ? "炎热" : "凉爽"}</h2>
+            {/*<input
+              ref={(cur) => {
+                this.input1 = cur;
+              }}
+              type="text"
+              placeholder="点击提示数据"
+            />*/}
+            <input
+              ref={this.saveInput}
+              type="text"
+              placeholder="点击提示数据"
+            />
+            <button onClick={this.clickBtn}>提交</button>
+            <button onClick={this.changeWeather}>切换天气</button>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<Demo />, document.getElementById("app"));
+  </script>
+</html>

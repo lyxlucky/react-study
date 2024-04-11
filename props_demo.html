@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>props批量传递</title>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    class Person extends React.Component{
+        render(){
+        const {name,age,sex} = this.props
+            return (
+                <ul>
+                    <li>姓名：{name}</li>
+                    <li>年龄：{age + 1}</li>
+                    <li>性别：{sex}</li>
+                </ul>
+            )
+        }
+    }
+    Person.propTypes = {
+        name:propTypes.string.isRequired,
+        age:propTypes.number,
+        sex:propTypes.oneOf(['男','女'])
+    }
+    const p = {name:"admin",age:"18",sex:"男"}
+    ReactDOM.render(<Person {...p}/>,document.getElementById('app'))
+</script>
+</html>
