@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React的生命周期（旧版）</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    class Count extends React.Component {
+      constructor(props) {
+        console.log("constructor");
+        super(props);
+      }
+
+      state = {
+        count: 0,
+      };
+
+      click = () => {
+        const { count } = this.state;
+        this.setState({ count: count + 1 });
+      };
+
+      //组件将要挂载钩子函数
+      componentWillMount() {
+        console.log("componentWillMount");
+      }
+
+      //组件挂载完毕钩子函数
+      componentDidMount() {
+        console.log("componentDidMount");
+      }
+
+      render() {
+        console.log("render");
+        return (
+          <div>
+            <h2>当前求和{ this.state.count }</h2>
+            <button onClick={this.click}>点我+1</button>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<Count />, document.getElementById("app"));
+  </script>
+</html>

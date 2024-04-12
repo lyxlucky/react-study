@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非受控组件</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    class Form extends React.Component{
+        btnSubmit = (event) => {
+            event.preventDefault();
+            const {username,password} = this;
+            alert(`您输入的账号是${username.value},密码是${password.value}`)
+        }
+        render(){
+            return (
+                <form onSubmit={this.btnSubmit}>
+                    <input ref={(c) => this.username = c} type="text" name='username' placeholder="请输入账户"/>
+                    <input ref={(c) => this.password = c} type="password" name='password' placeholder="请输入密码"/>
+                    <button type="submit">提交</button>
+                </form>
+            )
+        }
+    }
+    ReactDOM.render(<Form/>,document.getElementById('app'))
+</script>
+</html>
