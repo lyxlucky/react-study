@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>redux基本使用</title>
+</head>
+<body>
+    <button id="increment">+</button>
+    <span id="count">0</span>
+    <button id="decrement">-</button>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/redux/4.2.1/redux.min.js"></script>
+<script>
+    function reducer(state = {count:0},action){
+        if(action.type == "increment"){
+            return {count:state.count + 1}
+        }
+
+        if(action.type == "decrement"){
+            return {count:state.count - 1}
+        }
+
+        return state
+    }
+
+    const store = Redux.createStore(reducer)
+
+    // 定义变换
+    store.subscribe(()=>{
+        console.log("state变化",store.getState())
+    })
+
+
+    const add = document.getElementById("increment")
+    add.addEventListener('click',()=>{
+        // 增加
+        store.dispatch({
+            type:"increment"
+        })
+    })
+
+    const sub = document.getElementById("decrement")
+    sub.addEventListener('click',()=>{
+        // 减少
+        store.dispatch({
+            type:"decrement"
+        })
+    })
+</script>
+</html>
